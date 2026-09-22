@@ -1,0 +1,21 @@
+Project 5: Windows Endpoint Monitoring & Threat Detection using Sysmon
+📋 Objective
+The goal of this project is to configure System Monitor (Sysmon) on a Windows Virtual Machine to capture advanced endpoint telemetry, simulate a stealthy PowerShell execution technique (-EncodedCommand with Execution Policy Bypass), and verify how security monitoring tools detect process creation and command-line arguments.
+🛠️ Lab Architecture & Environment
+Host/Virtualization: VirtualBox
+Operating System: Windows 10 / Windows 11 Virtual Machine
+Monitoring Tool: Sysmon (System Monitor v15+)
+Log Analysis Tool: Windows Event Viewer (Microsoft-Windows-Sysmon/Operational)
+⚙️ Step-by-Step Implementation
+Step 1: Installing and Configuring Sysmon
+1: Downloaded Sysmon from the official Microsoft Sysinternals repository.
+2:Applied a hardened baseline configuration XML to filter noise and capture critical security event IDs (such as Process Creation, Network Connections, and Process Termination).
+3:Installed Sysmon via Administrator Command Prompt: Sysmon64.exe -i sysmonconfig.xml
+Step 3: Capturing & Analyzing Telemetry in Event Viewer
+After running the simulated command, Event Viewer was inspected under Applications and Services Logs > Microsoft > Windows > Sysmon > Operational:
+Event ID 1 (Process Create): Successfully logged the execution of powershell.exe, recording its parent process, user account (DESKTOP-G8FE4UE\admin), current directory (C:\Windows\system32), and full malicious command-line arguments (-W Hidden -Exec Bypass -Enc ...).
+Event ID 5 (Process Terminated): Captured the exact timestamp (2026-09-22 17:23:30) when the PowerShell process completed and terminated.
+🔍 Key Findings & Security Insights
+Command-Line Visibility: Standard Windows security logs often truncate or miss obfuscated arguments, whereas Sysmon Event ID 1 provides deep visibility into full command-line strings.
+Bypass Detection: Attackers frequently use -EncodedCommand and -ExecutionPolicy Bypass to evade basic script-block logging; however, proper endpoint logging captures the initial process creation parameters regardless of encoding.
+
