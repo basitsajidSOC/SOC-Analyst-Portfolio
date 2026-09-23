@@ -1,0 +1,20 @@
+ 1. Project Overview & Architecture (Wazuh Agents Dashboard)
+Caption: Setting up a centralized Wazuh SIEM lab environment on Ubuntu to monitor multiple endpoints (Kali Linux, Ubuntu target, and Windows 10 endpoint) for suspicious and malicious behavior.   
+PNG
+
+Details: This dashboard view displays active and disconnected agents, tracking security telemetry and log collection across the infrastructure.   
+PNG
+
+2. Attack Simulation (Volume Shadow Copy Deletion)
+Caption: Simulating pre-ransomware tactics on a Windows 10 target machine.   
+PNG
+
+Details: Executing the common attacker command vssadmin delete shadows /all /quiet via PowerShell to wipe out system restore points and prevent data recovery before encryption.   
+PNG
+
+3. SIEM Detection & Incident Alert (Wazuh Security Events)
+Caption: Real-time threat detection and log analysis via Wazuh SIEM.   
+PNG
+
+Details: Successfully captured and alerted on suspicious endpoint activity (DESKTOP-G8F4EUE), specifically flagging when critical backup services like the VSS service shut down due to malicious modification or idle timeout.   
+PNG
