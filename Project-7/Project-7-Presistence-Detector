@@ -1,0 +1,24 @@
+# Project 7: Windows Persistence Detector - Scheduled Task Creation (Event ID 4698)
+
+## 🎯 Objective
+To build a Windows endpoint persistence detection lab focusing on scheduled task creation—a common persistence mechanism used by threat actors to maintain access—and detecting it using Windows Security Event Logs and Wazuh SIEM.
+
+---
+
+## 🛠️ Tools & Technologies
+* **Endpoint:** Windows 10 VM with Wazuh Agent and Sysmon installed
+* **SIEM Server:** Wazuh-Ubuntu VM
+* **Detection Focus:** Windows Security Event ID 4698 (A scheduled task was created)
+
+---
+
+## ⚙️ Lab Implementation Steps
+
+### Step 1: Configure Advanced Audit Policy
+Enabled object access and task-related auditing on the Windows 10 endpoint to capture scheduled task creation events.
+
+### Step 2: Simulate Persistence via Scheduled Task
+Executed the following PowerShell command as Administrator to simulate an attacker creating a persistence mechanism:
+```powershell
+schtasks /create /tn "UpdateChecker" /tr "cmd.exe /c calc.exe" /sc ONLOGON /ru "SYSTEM" /f
+
