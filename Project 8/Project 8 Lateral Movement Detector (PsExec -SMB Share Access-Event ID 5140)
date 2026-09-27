@@ -1,0 +1,49 @@
+Project 8: Lateral Movement Detector (PsExec / SMB Share Access - Event ID 5140) 
+Create a new folder inside your SOC-Analyst-Portfolio repository:
+Folder Name: Project-8-Lateral-Movement-Detector
+File to Create: README.md (Paste the content below).
+📝 README.md Content (Copy & Paste)
+# Project 8: Windows Lateral Movement Detector - SMB Share Access (Event ID 5140)
+
+## 🎯 Objective
+To build a Windows endpoint lateral movement detection lab focusing on SMB network share access (`ADMIN$`)—a common technique used by threat actors and administrative tools like PsExec during lateral movement—and detecting it using Windows Security Event Logs and Wazuh SIEM.
+
+---
+
+## 🛠️ Tools & Technologies
+* **Endpoint:** Windows 10 VM with Wazuh Agent and Advanced Share Auditing enabled
+* **SIEM Server:** Wazuh-Ubuntu VM
+* **Detection Focus:** Windows Security Event ID 5140 (A network share object was accessed)
+
+---
+
+## ⚙️ Lab Implementation Steps
+
+### Step 1: Configure Advanced Audit Policy
+Configured local security policies (`secpol.msc`) on the Windows 10 endpoint to enable object access auditing for **Detailed File Share** and **File Share** (Success and Failure).
+
+### Step 2: Simulate Lateral Movement / Share Access
+Executed an SMB network share connection to the administrative share (`ADMIN$`) via command line (`net use \\127.0.0.1\ADMIN$`) to mimic lateral movement activity and test auditing controls.
+
+### Step 3: Verify Windows Security Logs
+* Opened Windows Event Viewer on the victim machine.
+* Navigated to `Windows Logs > Security` and inspected **Event ID 5140** to analyze the accessed network share path (`\\*\ADMIN$`), source network address, and user context.
+
+### Step 4: Monitor and Alert via Wazuh SIEM
+* Monitored security event streams through the Wazuh dashboard to track administrative share connections in real-time.
+
+---
+
+## 📸 Lab Screenshots
+
+### 1. Advanced Share Auditing Configuration (`secpol.msc`)
+*(Insert screenshot showing Local Security Policy / Advanced Audit Policy Configuration for File Share and Detailed File Share)*
+
+### 2. Simulating Lateral Movement via SMB Share Access
+*(Insert screenshot showing the command line execution: `net use \\127.0.0.1\ADMIN$ -> The command completed successfully.`)*
+
+### 3. Windows Security Event Viewer (Event ID 5140)
+*(Insert screenshot showing Event ID 5140: "A network share object was accessed")*
+
+### 4. Wazuh Dashboard Alerts
+*(Insert screenshot showing the Wazuh dashboard capturing endpoint security events)*
